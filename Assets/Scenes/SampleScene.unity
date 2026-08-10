@@ -270,6 +270,7 @@ GameObject:
   - component: {fileID: 316138169}
   - component: {fileID: 316138172}
   - component: {fileID: 316138171}
+  - component: {fileID: 316138174}
   - component: {fileID: 316138173}
   m_Layer: 0
   m_Name: Player
@@ -429,6 +430,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecfdcdf8e5a52f94daa9f9aa42438235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  _speed: 10
+--- !u!114 &316138174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316138168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b217274c637139a4fb4cfbd7f877ac5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerShooting
+  _bulletPrefab: {fileID: 6135215988281052740, guid: 37d9d59607f2ea5468786f7a01c46c22, type: 3}
 --- !u!1 &445138475
 GameObject:
   m_ObjectHideFlags: 0
