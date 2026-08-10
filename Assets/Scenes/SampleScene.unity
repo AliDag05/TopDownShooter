@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 75099128}
   m_Layer: 0
   m_Name: Wall_Right
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -444,6 +444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShooting
   _bulletPrefab: {fileID: 6135215988281052740, guid: 37d9d59607f2ea5468786f7a01c46c22, type: 3}
+  _fireRate: 0.2
 --- !u!1 &445138475
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,7 +458,7 @@ GameObject:
   - component: {fileID: 445138477}
   m_Layer: 0
   m_Name: Wall_Left
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -733,7 +734,7 @@ GameObject:
   - component: {fileID: 530258805}
   m_Layer: 0
   m_Name: Wall_Top
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -973,7 +974,7 @@ GameObject:
   - component: {fileID: 871295745}
   m_Layer: 0
   m_Name: Wall_Bottom
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
