@@ -3,6 +3,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _speed = 5.0f;
+    [SerializeField] private float _health = 3;
 
     private Rigidbody2D _rb;
     private Transform _playerTransform;
@@ -20,12 +21,6 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    
-    void Update()
-    {
-        
-    }
-
     private void FixedUpdate()
     {
         if (_playerTransform != null)
@@ -33,5 +28,11 @@ public class Enemy : MonoBehaviour
             lookDir = (_playerTransform.position - transform.position).normalized;
             _rb.linearVelocity = lookDir * _speed;
         }
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        _health -= damageAmount;
+        if (_health <= 0) { Destroy(gameObject); }
     }
 }
