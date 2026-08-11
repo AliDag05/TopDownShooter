@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D _rb;
     private Vector2 _moveInput;
+    private Vector2 _lookDir;
 
     void Awake()
     {
@@ -16,10 +17,15 @@ public class PlayerMovement : MonoBehaviour
     {
         _moveInput.x = Input.GetAxisRaw("Horizontal");
         _moveInput.y = Input.GetAxisRaw("Vertical");
+
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); 
+        _lookDir = mousePos - transform.position;
     }
 
     void FixedUpdate()
     {
         _rb.linearVelocity = _moveInput.normalized * _speed;
+        float angle = Mathf.Atan2(_lookDir.y, _lookDir.x) * Mathf.Rad2Deg; 
+        _rb.rotation = angle;
     }
 }
