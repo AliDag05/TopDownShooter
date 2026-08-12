@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     
     void Start()
     {
-        InvokeRepeating("Spawner", 1f, _spawnInterval);
+        InvokeRepeating(nameof(SpawnEnemy), 1f, _spawnInterval);
     }
 
     
@@ -17,8 +17,10 @@ public class EnemySpawner : MonoBehaviour
         
     }
 
-    void Spawner()
+    void SpawnEnemy()
     {
-        Instantiate(_enemyPrefab, transform.position, Quaternion.identity);
+        Vector3 spawnPosition = new Vector3(Random.Range(-8,8), Random.Range(-4,4), 0f);
+
+        Instantiate(_enemyPrefab, spawnPosition, Quaternion.identity);
     }
 }
