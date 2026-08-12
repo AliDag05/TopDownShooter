@@ -21,6 +21,11 @@ public class EnemySpawner : MonoBehaviour
     {
         Vector3 spawnPosition = new Vector3(Random.Range(-8,8), Random.Range(-4,4), 0f);
 
-        Instantiate(_enemyPrefab, spawnPosition, Quaternion.identity);
+        int currentEnemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+
+        if (currentEnemyCount < 10)
+        {
+            Instantiate(_enemyPrefab, spawnPosition, Quaternion.identity);
+        }
     }
 }
