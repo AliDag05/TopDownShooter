@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _speed = 10.0f;
+    [SerializeField] private int _health = 3;
 
     private Rigidbody2D _rb;
     private Vector2 _moveInput;
@@ -27,5 +28,11 @@ public class PlayerMovement : MonoBehaviour
         _rb.linearVelocity = _moveInput.normalized * _speed;
         float angle = Mathf.Atan2(_lookDir.y, _lookDir.x) * Mathf.Rad2Deg; 
         _rb.rotation = angle;
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        _health -= damageAmount;
+        if (_health <= 0) { Destroy(gameObject); }
     }
 }
