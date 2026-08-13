@@ -7,8 +7,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int _health = 3;
     [SerializeField] private TextMeshProUGUI _healthText;
 
-
-
     private Rigidbody2D _rb;
     private Vector2 _moveInput;
     private Vector2 _lookDir;
