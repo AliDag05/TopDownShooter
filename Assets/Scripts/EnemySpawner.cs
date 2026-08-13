@@ -1,13 +1,18 @@
 using UnityEngine;
+using TMPro;
 
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _enemyPrefab;
+    public TextMeshProUGUI _scoreText;
+
+    public int _score = 0;
 
     private float _spawnInterval = 2.0f;
     
     void Start()
     {
+        _scoreText.text = "Score: " + _score;
         InvokeRepeating(nameof(SpawnEnemy), 1f, _spawnInterval);
     }
 

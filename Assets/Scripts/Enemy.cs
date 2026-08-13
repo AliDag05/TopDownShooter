@@ -40,6 +40,13 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         _health -= damageAmount;
-        if (_health <= 0) { Destroy(gameObject); }
+        
+        if (_health <= 0) 
+        {
+            EnemySpawner enemySpawner = FindAnyObjectByType<EnemySpawner>();
+            if (enemySpawner != null ) { enemySpawner._score++; enemySpawner._scoreText.text = "Score: " + enemySpawner._score; }
+            
+            Destroy(gameObject);
+        }
     }
 }
