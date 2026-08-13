@@ -1,9 +1,11 @@
+using TMPro;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _speed = 10.0f;
     [SerializeField] private int _health = 3;
+    [SerializeField] private TextMeshProUGUI _healthText;
 
     private Rigidbody2D _rb;
     private Vector2 _moveInput;
@@ -12,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _healthText.text = "Health: " + _health;
     }
 
     void Update()
@@ -33,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         _health -= damageAmount;
+        _healthText.text = "Health: " + _health;
         if (_health <= 0) { Destroy(gameObject); }
     }
 }
