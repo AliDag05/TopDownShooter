@@ -4,9 +4,9 @@ using TMPro;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _enemyPrefab;
-    public TextMeshProUGUI _scoreText;
+    [SerializeField] private TextMeshProUGUI _scoreText;
 
-    public int _score = 0;
+    private int _score = 0;
 
     private float _spawnInterval = 2.0f;
     
@@ -14,12 +14,6 @@ public class EnemySpawner : MonoBehaviour
     {
         _scoreText.text = "Score: " + _score;
         InvokeRepeating(nameof(SpawnEnemy), 1f, _spawnInterval);
-    }
-
-    
-    void Update()
-    {
-        
     }
 
     void SpawnEnemy()
@@ -32,5 +26,11 @@ public class EnemySpawner : MonoBehaviour
         {
             Instantiate(_enemyPrefab, spawnPosition, Quaternion.identity);
         }
+    }
+
+    public void AddScore()
+    {
+        _score++;
+        _scoreText.text = "Score: " + _score;
     }
 }
