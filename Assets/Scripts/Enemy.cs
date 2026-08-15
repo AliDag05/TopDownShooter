@@ -43,8 +43,8 @@ public class Enemy : MonoBehaviour
         
         if (_health <= 0) 
         {
-            EnemySpawner enemySpawner = FindAnyObjectByType<EnemySpawner>();
-            if (enemySpawner != null ) { enemySpawner.AddScore(); }
+            GameManager gameManager = FindAnyObjectByType<GameManager>();
+            if (gameManager != null ) { gameManager.AddScore(); }
             
             Destroy(gameObject);
         }

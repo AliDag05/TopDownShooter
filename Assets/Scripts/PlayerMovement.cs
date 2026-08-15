@@ -37,6 +37,11 @@ public class PlayerMovement : MonoBehaviour
     {
         _health -= damageAmount;
         _healthText.text = "Health: " + _health;
-        if (_health <= 0) { Destroy(gameObject); }
+        GameManager gameManager = FindAnyObjectByType<GameManager>();
+        if (_health <= 0) 
+        {
+            gameManager.GameOver();
+            Destroy(gameObject); 
+        }
     }
 }

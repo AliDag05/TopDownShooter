@@ -8,12 +8,6 @@ public class PlayerShooting : MonoBehaviour
     private float _bulletSpeed = 10.0f;
     private float _nextFireTime ;
 
-    void Start()
-    {
-        
-    }
-
-    
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && _nextFireTime <= Time.time)
