@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,11 +20,17 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        _moveInput.x = Input.GetAxisRaw("Horizontal");
-        _moveInput.y = Input.GetAxisRaw("Vertical");
+        //_moveInput.x = Input.GetAxisRaw("Horizontal");
+        //_moveInput.y = Input.GetAxisRaw("Vertical");
 
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); 
-        _lookDir = mousePos - transform.position;
+        if (Gamepad.current != null) 
+        { 
+            _moveInput = Gamepad.current.leftStick.ReadValue(); 
+            _lookDir = Gamepad.current.rightStick.ReadValue(); 
+        }
+
+        //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); 
+        //_lookDir = mousePos - transform.position;
     }
 
     void FixedUpdate()

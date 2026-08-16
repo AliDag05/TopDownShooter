@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerShooting : MonoBehaviour
 {
@@ -10,24 +11,36 @@ public class PlayerShooting : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && _nextFireTime <= Time.time)
+        //if (Input.GetMouseButtonDown(0) && _nextFireTime <= Time.time)
+        //{
+        //    ShootBullet();
+        //    _nextFireTime = Time.time + _fireRate;
+        //}
+
+        if (Gamepad.current != null)
         {
-            ShootBullet();
-            _nextFireTime = Time.time + _fireRate;
+            Vector2 shootDir = Gamepad.current.rightStick.ReadValue();
+
+            if (shootDir.magnitude > 0.1f && Time.time >= _nextFireTime)
+            {
+                ShootBullet(shootDir);
+
+                _nextFireTime = Time.time + _fireRate;
+            }
         }
     }
 
-    void ShootBullet()
+    void ShootBullet(Vector2 direction)
     {
         Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 shootDirection = (mouseWorldPosition - transform.position);
+        //Vector2 shootDirection = (mouseWorldPosition - transform.position);
         
         GameObject spawnedBullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
         Rigidbody2D bulletRb = spawnedBullet.GetComponent<Rigidbody2D>();
 
         if (bulletRb != null)
         {
-            bulletRb.linearVelocity = shootDirection.normalized * _bulletSpeed;
+            bulletRb.linearVelocity = direction.normalized * _bulletSpeed;
         }
     }
 }
