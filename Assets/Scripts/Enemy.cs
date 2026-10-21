@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -5,20 +6,22 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _speed = 5.0f;
     [SerializeField] private float _health = 3;
 
+    public event Action<Enemy> OnDeath;
+
     private Rigidbody2D _rb;
     private Transform _playerTransform;
-
+    private float _currentHealth;
     Vector2 lookDir;
 
-    void Start()
+    void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        GameObject playerObj = GameObject.FindWithTag("Player");
+    }
 
-        if (playerObj != null )
-        {
-            _playerTransform = playerObj.transform;
-        }
+    public void Init(Transform playerTransform)
+    {
+        _playerTransform = playerTransform;
+        _currentHealth = _health;
     }
 
     private void FixedUpdate()
@@ -39,12 +42,11 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
-        _health -= damageAmount;
+        _currentHealth -= damageAmount;
         
-        if (_health <= 0) 
+        if (_currentHealth <= 0) 
         {
-            GameManager gameManager = FindAnyObjectByType<GameManager>();
-            if (gameManager != null ) { gameManager.AddScore(); }
+            OnDeath?.Invoke(this);
             
             Destroy(gameObject);
         }
