@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5624885185147767714}
   - component: {fileID: 4721831627397518543}
   - component: {fileID: 4241453127180352967}
+  - component: {fileID: 5192731868841577138}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -182,3 +183,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   _speed: 2
   _health: 3
+--- !u!114 &5192731868841577138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3065967585310576872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4941f47fce488404ea43aed77b396447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageFlash

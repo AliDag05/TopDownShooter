@@ -10,12 +10,14 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody2D _rb;
     private Transform _playerTransform;
+    private DamageFlash _damageFlash;
     private float _currentHealth;
     Vector2 lookDir;
 
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _damageFlash = GetComponent<DamageFlash>();
     }
 
     public void Init(Transform playerTransform)
@@ -42,6 +44,8 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
+        _damageFlash?.Flash();
+
         _currentHealth -= damageAmount;
         
         if (_currentHealth <= 0) 
