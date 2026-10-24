@@ -19,6 +19,12 @@ public class DamageFlash : MonoBehaviour
         StartCoroutine(FlashRoutine());
     }
 
+    public void ResetColor()
+    {
+        StopAllCoroutines();
+        _spriteRenderer.color = _originalColor;
+    }
+
     private IEnumerator FlashRoutine()
     {
         _spriteRenderer.color = Color.red;
