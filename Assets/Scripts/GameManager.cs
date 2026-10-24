@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     private int _score = 0;
 
-    void Start()
+    private void Start()
     {
         _scoreText.text = "Score: " + _score;
     }

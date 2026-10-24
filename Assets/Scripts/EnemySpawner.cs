@@ -14,7 +14,7 @@ public class EnemySpawner : MonoBehaviour
 
     private int _activeEnemiesCount = 0;
 
-    void Start()
+    private void Start()
     {
         _enemyPool = new ObjectPool<Enemy>(
             createFunc: CreateEnemy,
@@ -29,7 +29,7 @@ public class EnemySpawner : MonoBehaviour
         InvokeRepeating(nameof(RequestEnemy), 1f, _spawnInterval);
     }
 
-    void RequestEnemy()
+    private void RequestEnemy()
     {
         if (_activeEnemiesCount >= _maxEnemies) return;
 
@@ -47,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
         return enemy;
     }
 
-    void OnGetEnemy(Enemy enemy)
+    private void OnGetEnemy(Enemy enemy)
     {
         Vector3 spawnPosition = new Vector3(Random.Range(-8, 8), Random.Range(-4, 4), 0f);
         enemy.transform.position = spawnPosition;
@@ -59,7 +59,7 @@ public class EnemySpawner : MonoBehaviour
         _activeEnemiesCount++;
     }
 
-    void OnReleaseEnemy(Enemy enemy)
+    private void OnReleaseEnemy(Enemy enemy)
     {
         enemy.gameObject.SetActive(false);
 
@@ -68,12 +68,12 @@ public class EnemySpawner : MonoBehaviour
         _activeEnemiesCount--;
     }
 
-    void OnDestroyEnemy(Enemy enemy)
+    private void OnDestroyEnemy(Enemy enemy)
     {
         Destroy(enemy.gameObject);
     }
 
-    void HandleEnemyDeath(Enemy enemy)
+    private void HandleEnemyDeath(Enemy enemy)
     {
         if (_gameManager != null)
         {

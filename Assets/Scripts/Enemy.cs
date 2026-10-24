@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     private bool _isReleased;
     Vector2 lookDir;
 
-    void Awake()
+    private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _damageFlash = GetComponent<DamageFlash>();

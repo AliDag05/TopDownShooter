@@ -4,7 +4,7 @@ public class SafeArea : MonoBehaviour
 {
     private RectTransform rectTransform;
 
-    void Start()
+    private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
 

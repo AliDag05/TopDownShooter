@@ -12,13 +12,13 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _moveInput;
     private Vector2 _lookDir;
 
-    void Awake()
+    private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _healthText.text = "Health: " + _health;
     }
 
-    void Update()
+    private void Update()
     {
         //_moveInput.x = Input.GetAxisRaw("Horizontal");
         //_moveInput.y = Input.GetAxisRaw("Vertical");
@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
         //_lookDir = mousePos - transform.position;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         _rb.linearVelocity = _moveInput.normalized * _speed;
         float angle = Mathf.Atan2(_lookDir.y, _lookDir.x) * Mathf.Rad2Deg; 

@@ -8,7 +8,7 @@ public class DamageFlash : MonoBehaviour
     private Color _originalColor;
     private float _flashTime = 0.1f;
 
-    void Awake()
+    private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _originalColor = _spriteRenderer.color;

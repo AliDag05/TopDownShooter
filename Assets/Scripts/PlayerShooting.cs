@@ -12,7 +12,7 @@ public class PlayerShooting : MonoBehaviour
     private float _bulletSpeed = 10.0f;
     private float _nextFireTime ;
 
-    void Start()
+    private void Start()
     {
         _bulletPool = new ObjectPool<Bullet>(
             createFunc: CreateBullet,
@@ -25,7 +25,7 @@ public class PlayerShooting : MonoBehaviour
         );
     }
 
-    void Update()
+    private void Update()
     {
         //if (Input.GetMouseButtonDown(0) && _nextFireTime <= Time.time)
         //{
@@ -57,23 +57,23 @@ public class PlayerShooting : MonoBehaviour
         return bullet;
     }
 
-    void OnGetBullet(Bullet bullet)
+    private void OnGetBullet(Bullet bullet)
     {
         bullet.ResetBulletState();
         bullet.gameObject.SetActive(true);
     }
 
-    void OnReleaseBullet(Bullet bullet)
+    private void OnReleaseBullet(Bullet bullet)
     {
         bullet.gameObject.SetActive(false);
     }
 
-    void OnDestroyBullet(Bullet bullet)
+    private void OnDestroyBullet(Bullet bullet)
     {
         Destroy(bullet.gameObject);
     }
 
-    void ShootBullet(Vector2 direction)
+    private void ShootBullet(Vector2 direction)
     {
         //Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         //Vector2 shootDirection = (mouseWorldPosition - transform.position);
