@@ -33,16 +33,31 @@ public class PlayerShooting : MonoBehaviour
         //    _nextFireTime = Time.time + _fireRate;
         //}
 
+        Vector2 shootDir = Vector2.zero;
+
         if (Gamepad.current != null)
         {
-            Vector2 shootDir = Gamepad.current.rightStick.ReadValue();
+            Vector2 stickInput = Gamepad.current.rightStick.ReadValue();
 
-            if (shootDir.magnitude > 0.1f && Time.time >= _nextFireTime)
+            if (stickInput.magnitude > 0.1f)
             {
-                ShootBullet(shootDir);
-
-                _nextFireTime = Time.time + _fireRate;
+                shootDir = stickInput;
             }
+        }
+
+        if (shootDir == Vector2.zero && Mouse.current != null && Mouse.current.leftButton.isPressed)
+        {
+            Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
+
+            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPos.x, mouseScreenPos.y, Camera.main.nearClipPlane));
+
+            shootDir = mouseWorldPos - (Vector2)transform.position;
+        }
+
+        if (shootDir != Vector2.zero && Time.time >= _nextFireTime)
+        {
+            ShootBullet(shootDir);
+            _nextFireTime = Time.time + _fireRate;
         }
     }
 
