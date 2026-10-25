@@ -36,8 +36,6 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         _rb.linearVelocity = _moveInput.normalized * _speed;
-        float angle = Mathf.Atan2(_lookDir.y, _lookDir.x) * Mathf.Rad2Deg; 
-        _rb.rotation = angle;
     }
 
     public void TakeDamage(int damageAmount)

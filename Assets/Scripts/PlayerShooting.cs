@@ -42,16 +42,30 @@ public class PlayerShooting : MonoBehaviour
             if (stickInput.magnitude > 0.1f)
             {
                 shootDir = stickInput;
+
+                float angle = Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(0f, 0f, angle);
             }
         }
 
-        if (shootDir == Vector2.zero && Mouse.current != null && Mouse.current.leftButton.isPressed)
+        if (shootDir == Vector2.zero && Mouse.current != null)
         {
             Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
-
             Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPos.x, mouseScreenPos.y, Camera.main.nearClipPlane));
 
-            shootDir = mouseWorldPos - (Vector2)transform.position;
+            Vector2 lookDir = mouseWorldPos - (Vector2)transform.position;
+
+            if (lookDir != Vector2.zero)
+            {
+                float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(0f, 0f, angle);
+            }
+
+            if (Mouse.current.leftButton.isPressed)
+            {
+                shootDir = lookDir;
+            }
+
         }
 
         if (shootDir != Vector2.zero && Time.time >= _nextFireTime)
