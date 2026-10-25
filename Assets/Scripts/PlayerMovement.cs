@@ -23,11 +23,28 @@ public class PlayerMovement : MonoBehaviour
         //_moveInput.x = Input.GetAxisRaw("Horizontal");
         //_moveInput.y = Input.GetAxisRaw("Vertical");
 
+        Vector2 moveInput = Vector2.zero;
+
+        if (Keyboard.current != null)
+        {
+            if (Keyboard.current.wKey.isPressed) moveInput.y = 1f;
+            if (Keyboard.current.sKey.isPressed) moveInput.y = -1f;
+            if (Keyboard.current.aKey.isPressed) moveInput.x = -1f;
+            if (Keyboard.current.dKey.isPressed) moveInput.x = 1f;
+        }
+
         if (Gamepad.current != null) 
         { 
             _moveInput = Gamepad.current.leftStick.ReadValue(); 
             _lookDir = Gamepad.current.rightStick.ReadValue(); 
         }
+
+        if (moveInput == Vector2.zero && Gamepad.current != null)
+        {
+            moveInput = Gamepad.current.leftStick.ReadValue();
+        }
+
+        _moveInput = moveInput;
 
         //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); 
         //_lookDir = mousePos - transform.position;
