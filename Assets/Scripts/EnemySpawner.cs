@@ -5,17 +5,31 @@ using UnityEngine.Pool;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _enemyPrefab;
-    [SerializeField] private Transform _playerTransform;
-    [SerializeField] private GameManager _gameManager;
     [SerializeField] private int _maxEnemies = 10;
     [SerializeField] private float _spawnInterval = 2.0f;
+
+    private Transform _playerTransform;
+    private GameManager _gameManager;
 
     private IObjectPool<Enemy> _enemyPool;
 
     private int _activeEnemiesCount = 0;
 
+    private void Awake()
+    {
+        if (_playerTransform == null)
+        {
+            _playerTransform = FindAnyObjectByType<PlayerMovement>().transform;
+        }
+    }
+
     private void Start()
     {
+        if (_gameManager == null)
+        {
+            _gameManager = FindAnyObjectByType<GameManager>();
+        }
+
         _enemyPool = new ObjectPool<Enemy>(
             createFunc: CreateEnemy,
             actionOnGet: OnGetEnemy,
