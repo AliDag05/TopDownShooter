@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private int _maxEnemies = 10;
     [SerializeField] private float _spawnInterval = 2.0f;
+    [SerializeField] private float _spawnRadius = 12.0f;
 
     private Transform _playerTransform;
     private GameManager _gameManager;
@@ -63,7 +64,10 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnGetEnemy(Enemy enemy)
     {
-        Vector3 spawnPosition = new Vector3(Random.Range(-8, 8), Random.Range(-4, 4), 0f);
+        float randomAngle = Random.Range(0, 2 * Mathf.PI);
+        float x = Mathf.Cos(randomAngle);
+        float y = Mathf.Sin(randomAngle);
+        Vector3 spawnPosition = new Vector3(x * _spawnRadius + _playerTransform.position.x, y * _spawnRadius + _playerTransform.position.y, 0f);
         enemy.transform.position = spawnPosition;
 
         enemy.gameObject.SetActive(true);
