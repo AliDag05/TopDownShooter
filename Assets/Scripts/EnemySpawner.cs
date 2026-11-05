@@ -88,6 +88,8 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnDestroyEnemy(Enemy enemy)
     {
+        if (enemy == null) return;
+
         Destroy(enemy.gameObject);
     }
 
