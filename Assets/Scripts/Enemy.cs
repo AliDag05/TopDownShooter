@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _speed = 5.0f;
     [SerializeField] private float _health = 3;
+    [SerializeField] private float _attackCooldown = 1.0f;
 
     private IObjectPool<Enemy> _pool;
 
@@ -15,6 +16,7 @@ public class Enemy : MonoBehaviour
     private Transform _playerTransform;
     private DamageFlash _damageFlash;
 
+    private float _nextAttackTime;
     private float _currentHealth;
     private bool _isReleased;
     Vector2 lookDir;
@@ -47,11 +49,19 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
+        PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
 
-        if (player != null) { player.TakeDamage(1); }
+        if (playerHealth != null) 
+        {
+            if (Time.time >= _nextAttackTime)
+            {
+                playerHealth.TakeDamage(1);
+                _nextAttackTime = Time.time + _attackCooldown;
+            }
+             
+        }
     }
 
     public void TakeDamage(int damageAmount)

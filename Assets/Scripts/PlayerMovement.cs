@@ -5,9 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _speed = 10.0f;
-    [SerializeField] private int _health = 3;
-    [SerializeField] private TextMeshProUGUI _healthText;
-
+    
     private Rigidbody2D _rb;
     private Vector2 _moveInput;
     private Vector2 _lookDir;
@@ -15,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _healthText.text = "Health: " + _health;
     }
 
     private void Update()
@@ -53,17 +50,5 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         _rb.linearVelocity = _moveInput.normalized * _speed;
-    }
-
-    public void TakeDamage(int damageAmount)
-    {
-        _health -= damageAmount;
-        _healthText.text = "Health: " + _health;
-        GameManager gameManager = FindAnyObjectByType<GameManager>();
-        if (_health <= 0) 
-        {
-            gameManager.GameOver();
-            Destroy(gameObject); 
-        }
     }
 }
