@@ -131,8 +131,10 @@ GameObject:
   - component: {fileID: 316138169}
   - component: {fileID: 316138172}
   - component: {fileID: 316138171}
+  - component: {fileID: 316138176}
   - component: {fileID: 316138174}
   - component: {fileID: 316138173}
+  - component: {fileID: 316138175}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -293,8 +295,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   _speed: 5
-  _health: 3
-  _healthText: {fileID: 990744133}
 --- !u!114 &316138174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,6 +309,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShooting
   _bulletPrefab: {fileID: 6135215988281052740, guid: 37d9d59607f2ea5468786f7a01c46c22, type: 3}
   _fireRate: 0.2
+--- !u!114 &316138175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316138168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4941f47fce488404ea43aed77b396447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
+  _spriteRenderer: {fileID: 0}
+--- !u!114 &316138176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316138168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba5305ba9a93da41b31b9f37ee08d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  _maxHealth: 3
+  _currentHealth: 0
+  _invulnerabilityDuration: 0.5
+  _healthText: {fileID: 990744133}
 --- !u!1 &407899645
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,7 +631,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.11013707, g: 0.15902506, b: 0.23584908, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -873,7 +902,11 @@ MonoBehaviour:
         m_SelectedSource:
           rid: -2
         m_Provider2DCache:
-          rid: -2
+          rid: 5637800969293004872
+    - rid: 5637800969293004872
+      type: {class: 'Provider2DCache`1[[UnityEngine.Rendering.Universal.Light2DProvider, Unity.RenderPipelines.Universal.2D.Runtime]]', ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
+      data:
+        m_Cache: []
 --- !u!4 &619394802
 Transform:
   m_ObjectHideFlags: 0
@@ -1203,7 +1236,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1507,7 +1540,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1608,8 +1641,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   _enemyPrefab: {fileID: 3065967585310576872, guid: e05d4d1d250db0346819de9ba4e8101e, type: 3}
   _maxEnemies: 10
-  _spawnInterval: 2
-  _spawnRadius: 12
+  _spawnInterval: 1
+  _spawnRadius: 6
 --- !u!4 &1379898244
 Transform:
   m_ObjectHideFlags: 0
