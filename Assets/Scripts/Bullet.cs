@@ -32,10 +32,10 @@ public class Bullet : MonoBehaviour
 
         if (enemy != null ) { enemy.TakeDamage(1); ReleaseToPool(); }
 
-        if (collision.name.Contains("Wall"))
-        {
-            ReleaseToPool();
-        }
+        //if (collision.name.Contains("Wall"))
+        //{
+        //    ReleaseToPool();
+        //}
     }
 
     private void ReleaseToPool()

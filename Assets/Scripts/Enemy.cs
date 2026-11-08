@@ -4,6 +4,7 @@ using UnityEngine.Pool;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private GameObject _enemySoulPrefab;
     [SerializeField] private float _speed = 5.0f;
     [SerializeField] private float _health = 3;
     [SerializeField] private float _attackCooldown = 1.0f;
@@ -72,6 +73,14 @@ public class Enemy : MonoBehaviour
         
         if (_currentHealth <= 0) 
         {
+            GameObject soulObj = Instantiate(_enemySoulPrefab, transform.position, Quaternion.identity);
+            Soul soul = soulObj.GetComponent<Soul>();
+
+            if (soul != null)
+            {
+                soul.Init(_playerTransform);
+            }
+
             OnDeath?.Invoke(this);
 
             ReleaseToPool();
