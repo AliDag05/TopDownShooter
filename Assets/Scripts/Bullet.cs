@@ -43,4 +43,11 @@ public class Bullet : MonoBehaviour
         _isReleased = true;
         _pool.Release(this);
     }
+
+    private void OnBecameInvisible()
+    {
+        if (_isReleased ) return;
+
+        ReleaseToPool();
+    }
 }
