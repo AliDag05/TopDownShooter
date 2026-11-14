@@ -10,8 +10,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float _spawnRadius = 12.0f;
 
     private Transform _playerTransform;
-    private GameManager _gameManager;
-
     private IObjectPool<Enemy> _enemyPool;
 
     private int _activeEnemiesCount = 0;
@@ -26,11 +24,6 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-        if (_gameManager == null)
-        {
-            _gameManager = FindAnyObjectByType<GameManager>();
-        }
-
         _enemyPool = new ObjectPool<Enemy>(
             createFunc: CreateEnemy,
             actionOnGet: OnGetEnemy,
@@ -72,7 +65,6 @@ public class EnemySpawner : MonoBehaviour
 
         enemy.gameObject.SetActive(true);
         enemy.Init(_playerTransform);
-        enemy.OnDeath += HandleEnemyDeath;
 
         _activeEnemiesCount++;
     }
@@ -80,8 +72,6 @@ public class EnemySpawner : MonoBehaviour
     private void OnReleaseEnemy(Enemy enemy)
     {
         enemy.gameObject.SetActive(false);
-
-        enemy.OnDeath -= HandleEnemyDeath;
 
         _activeEnemiesCount--;
     }
@@ -91,13 +81,5 @@ public class EnemySpawner : MonoBehaviour
         if (enemy == null) return;
 
         Destroy(enemy.gameObject);
-    }
-
-    private void HandleEnemyDeath(Enemy enemy)
-    {
-        if (_gameManager != null)
-        {
-            _gameManager.AddScore();
-        }
     }
 }
