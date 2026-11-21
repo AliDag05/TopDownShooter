@@ -6,11 +6,18 @@ public class Bullet : MonoBehaviour
     private IObjectPool<Bullet> _pool;
 
     private Rigidbody2D _rb;
+
+    private int _damage;
     private bool _isReleased;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+    }
+
+    public void Init(int damage)
+    {
+        _damage = damage;
     }
 
     public void ResetBulletState()
@@ -30,7 +37,7 @@ public class Bullet : MonoBehaviour
 
         Enemy enemy = collision.GetComponent<Enemy>();
 
-        if (enemy != null ) { enemy.TakeDamage(1); ReleaseToPool(); }
+        if (enemy != null ) { enemy.TakeDamage(_damage); ReleaseToPool(); }
 
         //if (collision.name.Contains("Wall"))
         //{

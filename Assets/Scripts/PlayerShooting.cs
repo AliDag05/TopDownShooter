@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerShooting : MonoBehaviour
 {
     [SerializeField] private GameObject _bulletPrefab;
+    [SerializeField] private int _bulletDamage = 1;
     [SerializeField] private float _fireRate = 0.2f;
 
     private IObjectPool<Bullet> _bulletPool;
@@ -112,6 +113,8 @@ public class PlayerShooting : MonoBehaviour
         
         Bullet bullet = _bulletPool.Get();
 
+        bullet.Init(_bulletDamage);
+
         bullet.transform.position = transform.position;
 
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
@@ -121,4 +124,7 @@ public class PlayerShooting : MonoBehaviour
             bulletRb.linearVelocity = direction.normalized * _bulletSpeed;
         }
     }
+
+    public void IncreaseDamage(int amount) => _bulletDamage += amount;
+    public void IncreaseFireRate(float multiplier) => _fireRate = Mathf.Max(0.05f, _fireRate * multiplier);
 }
